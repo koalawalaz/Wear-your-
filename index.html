@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wear Your — Statement Apparel</title>
+<meta name="description" content="Wear Your is a streetwear label built around one idea: your shirt is your statement. Resistance, Drama, Ego, Solidarity — pick your stance.">
+<link rel="icon" href="assets/brandmark.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <img src="assets/brandmark.png" alt="Wear Your logo" class="brand-mark">
+      <span class="brand-name">WEAR YOUR<span class="brand-dots">...</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#collections">Collections</a>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#shop">Shop</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#shop" class="btn btn-primary">Shop Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow">A statement, stitched in</p>
+      <h1 class="hero-title">
+        WEAR YOUR<br>
+        <span class="rotator" id="rotator">RESISTANCE</span>
+      </h1>
+      <p class="hero-sub">Four attitudes. One label. Every tee is a line drawn in ink and thread — pick the one that says what you won't.</p>
+      <div class="hero-cta">
+        <a href="#collections" class="btn btn-light">Explore Collections</a>
+        <a href="#manifesto" class="btn btn-outline">Our Manifesto</a>
+      </div>
+      <div class="hero-dots" id="heroDots"></div>
+    </div>
+    <div class="scroll-cue">
+      <span></span>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>RESISTANCE — DRAMA — EGO — SOLIDARITY — RESISTANCE — DRAMA — EGO — SOLIDARITY — RESISTANCE — DRAMA — EGO — SOLIDARITY — </span>
+      <span aria-hidden="true">RESISTANCE — DRAMA — EGO — SOLIDARITY — RESISTANCE — DRAMA — EGO — SOLIDARITY — RESISTANCE — DRAMA — EGO — SOLIDARITY — </span>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section class="collections" id="collections">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow-dark">The Lineup</p>
+        <h2>Four Ways To Wear It Loud</h2>
+        <p class="section-lead">Every collection is a mood, a fist, a fandom, a fight. Find the one that's yours.</p>
+      </div>
+
+      <div class="collection-grid">
+
+        <article class="collection-card" style="--card-color:#2b5d1c;">
+          <div class="card-media">
+            <img src="assets/resistance.png" alt="Wear Your Resistance — raised fist holding an olive branch on a dark green background">
+          </div>
+          <div class="card-body">
+            <h3>Resistance</h3>
+            <p>For the ones who show up. A raised fist wrapped around an olive branch — power and peace on the same sleeve.</p>
+            <a href="#shop" class="card-link">Shop Resistance <span>&rarr;</span></a>
+          </div>
+        </article>
+
+        <article class="collection-card" style="--card-color:#0e93a4;">
+          <div class="card-media">
+            <img src="assets/drama.png" alt="Wear Your Drama — a star trophy on a teal background">
+          </div>
+          <div class="card-body">
+            <h3>Drama</h3>
+            <p>Main-character energy, framed and awarded. For everyone who never asked to keep it down.</p>
+            <a href="#shop" class="card-link">Shop Drama <span>&rarr;</span></a>
+          </div>
+        </article>
+
+        <article class="collection-card" style="--card-color:#5b23e8;">
+          <div class="card-media">
+            <img src="assets/ego.png" alt="Wear Your Ego — a striped tiger on a violet background">
+          </div>
+          <div class="card-body">
+            <h3>Ego</h3>
+            <p>Confidence with teeth. A tiger that doesn't apologize for taking up the room it needs.</p>
+            <a href="#shop" class="card-link">Shop Ego <span>&rarr;</span></a>
+          </div>
+        </article>
+
+        <article class="collection-card" style="--card-color:#8a1414;">
+          <div class="card-media">
+            <img src="assets/solidarity.png" alt="Wear Your Solidarity — clasped hands on a deep red background">
+          </div>
+          <div class="card-body">
+            <h3>Solidarity</h3>
+            <p>Linked hands, one grip. Built for the people who stand closer when it gets harder.</p>
+            <a href="#shop" class="card-link">Shop Solidarity <span>&rarr;</span></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto" id="manifesto">
+    <div class="container manifesto-inner">
+      <div class="manifesto-mark">
+        <img src="assets/brandmark.png" alt="Wear Your brand mark">
+      </div>
+      <div class="manifesto-copy">
+        <p class="eyebrow eyebrow-dark">Why We Print</p>
+        <h2>Clothing that says the quiet part out loud.</h2>
+        <p>We started Wear Your because a plain tee never said enough. Every drop is one word and one feeling, screen-printed onto heavyweight cotton and built to survive the wash, the wear, and the point you're trying to make.</p>
+        <p>No algorithm-chasing graphics, no filler drops. Four statements, made well, restocked when they sell out — and not before.</p>
+        <div class="manifesto-stats">
+          <div><strong>4</strong><span>Core collections</span></div>
+          <div><strong>100%</strong><span>Heavyweight cotton</span></div>
+          <div><strong>0</strong><span>Filler drops</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP / CTA STRIP -->
+  <section class="shop-cta" id="shop">
+    <div class="container">
+      <h2>Pick your statement.</h2>
+      <p>New drops land first for the mailing list. Everything else sells out.</p>
+      <form class="signup-form" id="signupForm">
+        <input type="email" required placeholder="you@example.com" aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Notify Me</button>
+      </form>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="assets/brandmark.png" alt="Wear Your logo" class="brand-mark">
+      <span class="brand-name">WEAR YOUR<span class="brand-dots">...</span></span>
+      <p>Statement apparel for people who won't tone it down.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#collections">Resistance</a>
+      <a href="#collections">Drama</a>
+      <a href="#collections">Ego</a>
+      <a href="#collections">Solidarity</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#top">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="#top">Instagram</a>
+      <a href="#top">TikTok</a>
+      <a href="#top">X</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> Wear Your. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
