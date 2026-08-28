@@ -1,6 +1,4 @@
 (function () {
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   // Hero entrance
   var heroInner = document.querySelector(".hero-inner");
   requestAnimationFrame(function () {
@@ -166,40 +164,9 @@
       chantObserver.observe(chant);
     }
 
-    // Manifesto stat count-up
-    var statEls = document.querySelectorAll("[data-count-to]");
-    if (statEls.length) {
-      var statObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          statObserver.unobserve(entry.target);
-          var el = entry.target;
-          var target = parseInt(el.getAttribute("data-count-to"), 10);
-          var suffix = el.getAttribute("data-suffix") || "";
-          if (reduceMotion) {
-            el.textContent = target + suffix;
-            return;
-          }
-          var start = null;
-          var duration = 1100;
-          function step(ts) {
-            if (start === null) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(target * eased) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        });
-      }, { threshold: 0.6 });
-      statEls.forEach(function (el) { statObserver.observe(el); });
-    }
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in-view"); });
     var chantFallback = document.querySelector(".manifesto-chant");
     if (chantFallback) chantFallback.classList.add("in-view");
-    document.querySelectorAll("[data-count-to]").forEach(function (el) {
-      el.textContent = el.getAttribute("data-count-to") + (el.getAttribute("data-suffix") || "");
-    });
   }
 })();
