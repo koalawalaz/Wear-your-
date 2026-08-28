@@ -640,13 +640,6 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 4px 4px 0 var(--yellow);
   flex-shrink: 0;
 }
-.manifesto-location {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: rgba(255,253,248,0.45);
-}
 .manifesto-copy h2 {
   font-family: var(--font-display);
   font-weight: 400;
