@@ -52,6 +52,26 @@
 
   restartTimer();
 
+  // Hero eyebrow chant rotator
+  var chantLines = [
+    "Wear your history.",
+    "Wear your integrity.",
+    "Wear your voice.",
+    "Wear it. Mean it."
+  ];
+  var chantIdx = 0;
+  var chantEl = document.getElementById("heroChant");
+  if (chantEl) {
+    setInterval(function () {
+      chantIdx = (chantIdx + 1) % chantLines.length;
+      chantEl.classList.add("swap");
+      setTimeout(function () {
+        chantEl.textContent = chantLines[chantIdx];
+        chantEl.classList.remove("swap");
+      }, 220);
+    }, 2600);
+  }
+
   // Sticky header state
   var header = document.getElementById("siteHeader");
   var progressBar = document.getElementById("progressBar");
