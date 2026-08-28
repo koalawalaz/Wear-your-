@@ -29,6 +29,14 @@
     </nav>
     <div class="header-actions">
       <a href="#shop" class="btn btn-primary">Shop Now</a>
+      <button class="cart-toggle" id="cartToggle" aria-label="Open cart" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -90,7 +98,14 @@
           <div class="card-body">
             <h3>Resistance</h3>
             <p>For the ones who show up. A raised fist wrapped around an olive branch — power and peace on the same sleeve.</p>
-            <a href="#shop" class="card-link">Shop Resistance <span>&rarr;</span></a>
+            <p class="card-price">JD 25.00</p>
+            <div class="size-picker" role="group" aria-label="Select size">
+              <button type="button" class="size-opt" data-size="S">S</button>
+              <button type="button" class="size-opt active" data-size="M">M</button>
+              <button type="button" class="size-opt" data-size="L">L</button>
+              <button type="button" class="size-opt" data-size="XL">XL</button>
+            </div>
+            <button type="button" class="add-cart-btn" data-product="resistance">Add to Cart</button>
           </div>
         </article>
 
@@ -105,7 +120,14 @@
           <div class="card-body">
             <h3>Solidarity</h3>
             <p>Linked hands, one grip. Built for the people who stand closer when it gets harder.</p>
-            <a href="#shop" class="card-link">Shop Solidarity <span>&rarr;</span></a>
+            <p class="card-price">JD 25.00</p>
+            <div class="size-picker" role="group" aria-label="Select size">
+              <button type="button" class="size-opt" data-size="S">S</button>
+              <button type="button" class="size-opt active" data-size="M">M</button>
+              <button type="button" class="size-opt" data-size="L">L</button>
+              <button type="button" class="size-opt" data-size="XL">XL</button>
+            </div>
+            <button type="button" class="add-cart-btn" data-product="solidarity">Add to Cart</button>
           </div>
         </article>
 
@@ -117,7 +139,14 @@
           <div class="card-body">
             <h3>Fly Your Kite</h3>
             <p>A lighter kind of statement — playful, one-off, and gone once it's gone.</p>
-            <a href="#shop" class="card-link">Shop Fly Your Kite <span>&rarr;</span></a>
+            <p class="card-price">JD 20.00</p>
+            <div class="size-picker" role="group" aria-label="Select size">
+              <button type="button" class="size-opt" data-size="S">S</button>
+              <button type="button" class="size-opt active" data-size="M">M</button>
+              <button type="button" class="size-opt" data-size="L">L</button>
+              <button type="button" class="size-opt" data-size="XL">XL</button>
+            </div>
+            <button type="button" class="add-cart-btn" data-product="kite">Add to Cart</button>
           </div>
         </article>
 
@@ -234,6 +263,77 @@
     </a>
   </div>
 </footer>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+
+  <div class="cart-view" id="cartView">
+    <div class="cart-drawer-head">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <p class="cart-empty" id="cartEmpty">Your cart is empty. Go pick a statement.</p>
+    <div class="cart-summary" id="cartSummary" hidden>
+      <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">JD 0.00</span></div>
+      <div class="cart-row"><span>Delivery</span><span id="cartDelivery">JD 2.00</span></div>
+      <p class="cart-free-note" id="cartFreeNote"></p>
+      <div class="cart-row cart-total"><span>Total</span><span id="cartTotal">JD 0.00</span></div>
+      <button type="button" class="btn btn-primary cart-checkout-btn" id="cartCheckoutBtn">Checkout</button>
+    </div>
+  </div>
+
+  <div class="cart-view" id="checkoutView" hidden>
+    <div class="cart-drawer-head">
+      <button type="button" class="cart-back" id="checkoutBack" aria-label="Back to cart">&larr;</button>
+      <h2>Checkout</h2>
+      <button type="button" class="cart-close" id="checkoutClose" aria-label="Close cart">&times;</button>
+    </div>
+    <form class="checkout-form" id="checkoutForm">
+      <label>Full name
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label>Phone number
+        <input type="tel" name="phone" required autocomplete="tel">
+      </label>
+      <label>Delivery address
+        <textarea name="address" rows="2" required></textarea>
+      </label>
+      <fieldset class="payment-method">
+        <legend>Payment method</legend>
+        <label class="payment-opt">
+          <input type="radio" name="payment" value="Cash on Delivery" checked>
+          Cash on Delivery
+        </label>
+        <label class="payment-opt">
+          <input type="radio" name="payment" value="CliQ Transfer">
+          CliQ Transfer
+        </label>
+      </fieldset>
+      <div class="cart-summary">
+        <div class="cart-row"><span>Subtotal</span><span id="checkoutSubtotal">JD 0.00</span></div>
+        <div class="cart-row"><span>Delivery</span><span id="checkoutDelivery">JD 2.00</span></div>
+        <div class="cart-row cart-total"><span>Total</span><span id="checkoutTotal">JD 0.00</span></div>
+      </div>
+      <button type="submit" class="btn btn-primary cart-checkout-btn">Place Order</button>
+    </form>
+  </div>
+
+  <div class="cart-view" id="confirmView" hidden>
+    <div class="cart-drawer-head">
+      <h2>Order Placed</h2>
+      <button type="button" class="cart-close" id="confirmClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="order-confirm">
+      <p class="order-confirm-mark">&check;</p>
+      <p class="order-confirm-id" id="orderId">Order #WY-000000</p>
+      <p class="order-confirm-msg">Wear it. Mean it. We'll be in touch to confirm delivery and payment.</p>
+      <div class="cart-summary" id="orderSummary"></div>
+      <button type="button" class="btn btn-light" id="confirmDone">Done</button>
+    </div>
+  </div>
+
+</aside>
 
 <script src="script.js"></script>
 </body>
