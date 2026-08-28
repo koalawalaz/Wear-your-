@@ -569,9 +569,17 @@ a { color: inherit; text-decoration: none; }
 }
 .manifesto-copy p {
   color: rgba(255,253,248,0.78);
-  line-height: 1.7;
-  font-size: 1.02rem;
-  margin: 0 0 16px;
+  line-height: 1.65;
+  font-size: 1rem;
+  margin: 0 0 14px;
+}
+.manifesto-copy .manifesto-beat {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--cream);
+  margin: 24px 0 12px;
 }
 .manifesto-chant {
   list-style: none;
