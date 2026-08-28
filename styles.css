@@ -561,27 +561,31 @@ a { color: inherit; text-decoration: none; }
 .manifesto-credit {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   margin: 0;
-  padding: 8px 20px 8px 8px;
-  border: 2px solid var(--orange);
-  border-radius: 999px;
+  padding: 12px 26px 12px 12px;
+  border: var(--border-w) solid var(--orange);
+  border-radius: var(--radius);
   background: rgba(243,112,28,0.14);
-  font-size: 0.95rem;
+}
+.manifesto-credit-text {
+  margin: 0;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.01em;
   color: var(--cream);
   text-align: left;
   white-space: nowrap;
 }
-.manifesto-credit a { color: var(--orange); font-weight: 800; }
+.manifesto-credit a { color: var(--orange); font-weight: 800; font-size: 1.15rem; }
 .manifesto-credit .credit-logo {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 76px;
+  height: 76px;
+  border-radius: 16px;
   object-fit: cover;
-  border: 2px solid var(--orange);
-  box-shadow: none;
+  border: var(--border-w) solid var(--orange);
+  box-shadow: 4px 4px 0 var(--orange);
   flex-shrink: 0;
 }
 .manifesto-location {
