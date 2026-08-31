@@ -289,7 +289,7 @@
       <h2>Checkout</h2>
       <button type="button" class="cart-close" id="checkoutClose" aria-label="Close cart">&times;</button>
     </div>
-    <form class="checkout-form" id="checkoutForm">
+    <form class="checkout-form" id="checkoutForm" action="https://formspree.io/f/xppzpwja" method="POST">
       <label>Full name
         <input type="text" name="name" required autocomplete="name">
       </label>
@@ -315,7 +315,8 @@
         <div class="cart-row"><span>Delivery</span><span id="checkoutDelivery">JD 2.00</span></div>
         <div class="cart-row cart-total"><span>Total</span><span id="checkoutTotal">JD 0.00</span></div>
       </div>
-      <button type="submit" class="btn btn-primary cart-checkout-btn">Place Order</button>
+      <p class="checkout-error" id="checkoutError" hidden></p>
+      <button type="submit" class="btn btn-primary cart-checkout-btn" id="placeOrderBtn">Place Order</button>
     </form>
   </div>
 

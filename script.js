@@ -487,6 +487,9 @@
     container.appendChild(row);
   }
 
+  var checkoutErrorEl = document.getElementById("checkoutError");
+  var placeOrderBtn = document.getElementById("placeOrderBtn");
+
   checkoutForm.addEventListener("submit", function (e) {
     e.preventDefault();
     if (cart.length === 0) return;
@@ -494,31 +497,61 @@
     var formData = new FormData(checkoutForm);
     var name = String(formData.get("name") || "").trim();
     var phone = String(formData.get("phone") || "").trim();
+    var address = String(formData.get("address") || "").trim();
     var payment = String(formData.get("payment") || "Cash on Delivery");
 
     var orderId = "WY-" + Math.floor(100000 + Math.random() * 900000);
-    orderIdEl.textContent = "Order #" + orderId;
-
     var sub = subtotal();
     var fee = deliveryFee();
-
-    orderSummaryEl.innerHTML = "";
-    addSummaryRow(orderSummaryEl, name, phone);
-    addSummaryRow(orderSummaryEl, "Payment", payment);
-    cart.forEach(function (line) {
+    var itemsText = cart.map(function (line) {
       var p = PRODUCTS[line.id];
-      if (!p) return;
-      addSummaryRow(orderSummaryEl, p.name + " (" + line.size + ") ×" + line.qty, money(p.price * line.qty));
-    });
-    addSummaryRow(orderSummaryEl, "Subtotal", money(sub));
-    addSummaryRow(orderSummaryEl, "Delivery", fee === 0 ? "Free" : money(fee));
-    addSummaryRow(orderSummaryEl, "Total", money(sub + fee), true);
+      return p ? (p.name + " (" + line.size + ") ×" + line.qty + " — " + money(p.price * line.qty)) : "";
+    }).filter(Boolean).join("\n");
 
-    cart = [];
-    saveCart();
-    renderCart();
-    checkoutForm.reset();
-    showView(confirmView);
+    formData.set("_subject", "New Wear Your order — " + orderId);
+    formData.append("orderId", orderId);
+    formData.append("items", itemsText);
+    formData.append("subtotal", money(sub));
+    formData.append("delivery", fee === 0 ? "Free" : money(fee));
+    formData.append("total", money(sub + fee));
+
+    checkoutErrorEl.hidden = true;
+    placeOrderBtn.disabled = true;
+    placeOrderBtn.textContent = "Placing Order…";
+
+    fetch(checkoutForm.action, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    }).then(function (res) {
+      if (!res.ok) throw new Error("Request failed");
+
+      orderIdEl.textContent = "Order #" + orderId;
+      orderSummaryEl.innerHTML = "";
+      addSummaryRow(orderSummaryEl, name, phone);
+      addSummaryRow(orderSummaryEl, "Address", address);
+      addSummaryRow(orderSummaryEl, "Payment", payment);
+      cart.forEach(function (line) {
+        var p = PRODUCTS[line.id];
+        if (!p) return;
+        addSummaryRow(orderSummaryEl, p.name + " (" + line.size + ") ×" + line.qty, money(p.price * line.qty));
+      });
+      addSummaryRow(orderSummaryEl, "Subtotal", money(sub));
+      addSummaryRow(orderSummaryEl, "Delivery", fee === 0 ? "Free" : money(fee));
+      addSummaryRow(orderSummaryEl, "Total", money(sub + fee), true);
+
+      cart = [];
+      saveCart();
+      renderCart();
+      checkoutForm.reset();
+      showView(confirmView);
+    }).catch(function () {
+      checkoutErrorEl.textContent = "Couldn't send your order — check your connection and try again.";
+      checkoutErrorEl.hidden = false;
+    }).finally(function () {
+      placeOrderBtn.disabled = false;
+      placeOrderBtn.textContent = "Place Order";
+    });
   });
 
   renderCart();

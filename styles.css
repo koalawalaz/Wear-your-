@@ -1152,6 +1152,17 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
 }
 .payment-opt input { accent-color: var(--ink); width: 16px; height: 16px; }
+.checkout-error {
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(138,20,20,0.08);
+  border: 1.5px solid var(--red);
+  border-radius: 8px;
+  color: var(--red);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+#placeOrderBtn[disabled] { opacity: 0.6; cursor: not-allowed; }
 
 .order-confirm {
   flex: 1;
