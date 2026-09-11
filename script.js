@@ -115,6 +115,24 @@
   // Footer year
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // Pick Your Statement — jump to a collection card and highlight it
+  var statementSelect = document.getElementById("statementSelect");
+  if (statementSelect) {
+    statementSelect.addEventListener("change", function () {
+      var card = document.getElementById(statementSelect.value);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "start" });
+        card.classList.remove("jump-highlight");
+        void card.offsetWidth;
+        card.classList.add("jump-highlight");
+        setTimeout(function () {
+          card.classList.remove("jump-highlight");
+        }, 1500);
+      }
+      statementSelect.selectedIndex = 0;
+    });
+  }
+
   // Collection card photo galleries (Resistance / Solidarity real product shots)
   document.querySelectorAll(".card-gallery").forEach(function (gallery) {
     var slides = Array.prototype.slice.call(gallery.querySelectorAll(".gallery-slide"));

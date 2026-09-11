@@ -84,11 +84,23 @@
         <p class="eyebrow eyebrow-dark">The Lineup</p>
         <h2>Made For The Ones Who Speak Up.</h2>
         <p class="section-lead">Merchandise with a point of view.</p>
+        <div class="statement-picker">
+          <label for="statementSelect">Pick your statement</label>
+          <select id="statementSelect">
+            <option value="" selected disabled>Jump to a collection&hellip;</option>
+            <option value="resistance">Resistance</option>
+            <option value="solidarity">Solidarity</option>
+            <option value="fly-your-kite">Fly Your Kite</option>
+            <option value="kindness">Kindness</option>
+            <option value="ego">Ego</option>
+            <option value="drama">Drama</option>
+          </select>
+        </div>
       </div>
 
       <div class="collection-grid">
 
-        <article class="collection-card reveal" style="--card-color:#2b5d1c;">
+        <article class="collection-card reveal" id="resistance" style="--card-color:#2b5d1c;">
           <div class="card-media card-gallery">
             <img src="assets/resistance-v2.png" alt="Wear Your Resistance — raised fist holding an olive branch on a dark green background" class="gallery-slide active">
             <img src="assets/resistance-model.png" alt="Model wearing the dusty-green Wear Your Resistance zip hoodie, fist-and-olive-branch mark on the chest" class="gallery-slide">
@@ -109,7 +121,7 @@
           </div>
         </article>
 
-        <article class="collection-card reveal" style="--card-color:#8a1414;">
+        <article class="collection-card reveal" id="solidarity" style="--card-color:#8a1414;">
           <div class="card-media card-gallery">
             <img src="assets/solidarity.png" alt="Wear Your Solidarity — clasped hands on a deep red background" class="gallery-slide active">
             <img src="assets/solidarity-front.png" alt="Front print of the black Wear Your Solidarity hoodie, keffiyeh-patterned block text and an olive branch" class="gallery-slide">
@@ -150,7 +162,7 @@
           </div>
         </article>
 
-        <article class="collection-card reveal" style="--card-color:#1c8f7c;">
+        <article class="collection-card reveal" id="kindness" style="--card-color:#1c8f7c;">
           <div class="card-media">
             <img src="assets/kindness.png" alt="Wear Your Kindness — two hands clasped in a heart shape, hand-lettered &quot;I am kind&quot; above">
             <span class="coming-soon-badge">Coming Soon</span>
@@ -162,7 +174,7 @@
           </div>
         </article>
 
-        <article class="collection-card reveal" style="--card-color:#5b23e8;">
+        <article class="collection-card reveal" id="ego" style="--card-color:#5b23e8;">
           <div class="card-media">
             <img src="assets/ego.png" alt="Wear Your Ego — a striped tiger on a violet background">
             <span class="coming-soon-badge">Coming Soon</span>
@@ -174,7 +186,7 @@
           </div>
         </article>
 
-        <article class="collection-card reveal" style="--card-color:#0e93a4;">
+        <article class="collection-card reveal" id="drama" style="--card-color:#0e93a4;">
           <div class="card-media">
             <img src="assets/drama.png" alt="Wear Your Drama — a star trophy on a teal background">
             <span class="coming-soon-badge">Coming Soon</span>
