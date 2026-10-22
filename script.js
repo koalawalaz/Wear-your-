@@ -163,42 +163,42 @@
       desc: "Some things you don't stay silent about.",
       price: 25, inStock: true, color: "#2b5d1c",
       image: "assets/resistance-hoodie.png",
-      images: ["assets/resistance-hoodie.png", "assets/resistance-model.png", "assets/resistance-back.png"]
+      sideImage: "assets/resistance-hoodie-side.png"
     },
     solidarity: {
       name: "Wear Your Solidarity", shortName: "Solidarity",
       desc: "Your voice carries the values you hold.",
       price: 25, inStock: true, color: "#8a1414",
       image: "assets/solidarity-hoodie.png",
-      images: ["assets/solidarity-hoodie.png", "assets/solidarity-front.png", "assets/solidarity-portrait.png", "assets/solidarity-flatlay.png"]
+      sideImage: "assets/solidarity-hoodie-side.png"
     },
     kite: {
       name: "Fly Your Kite", shortName: "Fly Your Kite",
       desc: "When flying a kite is an act of war, letting go of the string is an act of freedom.",
       price: 20, inStock: true, color: "#f5c518", badge: "Limited Edition",
       image: "assets/fly-your-kite-hoodie.png",
-      images: ["assets/fly-your-kite-hoodie.png"]
+      sideImage: "assets/fly-your-kite-hoodie-side.png"
     },
     kindness: {
       name: "Wear Your Kindness", shortName: "Kindness",
       desc: "Wear the value you hold when no one's asking you to.",
       inStock: false, color: "#1c8f7c", badge: "Coming Soon",
       image: "assets/kindness-hoodie.png",
-      images: ["assets/kindness-hoodie.png"]
+      sideImage: "assets/kindness-hoodie-side.png"
     },
     ego: {
       name: "Wear Your Ego", shortName: "Ego",
       desc: "Your principles aren't up for negotiation.",
       inStock: false, color: "#5b23e8", badge: "Coming Soon",
       image: "assets/ego-hoodie.png",
-      images: ["assets/ego-hoodie.png"]
+      sideImage: "assets/ego-hoodie-side.png"
     },
     drama: {
       name: "Wear Your Drama", shortName: "Drama",
       desc: "Every story deserves its spotlight.",
       inStock: false, color: "#0e93a4", badge: "Coming Soon",
       image: "assets/drama-hoodie.png",
-      images: ["assets/drama-hoodie.png"]
+      sideImage: "assets/drama-hoodie-side.png"
     }
   };
   var RACK_ORDER = ["resistance", "solidarity", "kite", "kindness", "ego", "drama"];
@@ -464,8 +464,7 @@
   // Product lightbox — focused view with prev/next navigation across the rack
   var lightbox = document.getElementById("productLightbox");
   var lightboxPanel = lightbox ? lightbox.querySelector(".lightbox-panel") : null;
-  var lightboxSlides = document.getElementById("lightboxSlides");
-  var lightboxDots = document.getElementById("lightboxDots");
+  var lightboxFrontImg = document.getElementById("lightboxFrontImg");
   var lightboxName = document.getElementById("lightboxName");
   var lightboxCount = document.getElementById("lightboxCount");
   var lightboxDesc = document.getElementById("lightboxDesc");
@@ -482,42 +481,9 @@
   var lightboxNext = document.getElementById("lightboxNext");
 
   var lightboxIndex = 0;
-  var lightboxGalleryTimer;
 
-  function renderLightboxGallery(images) {
-    clearInterval(lightboxGalleryTimer);
-    lightboxSlides.innerHTML = "";
-    lightboxDots.innerHTML = "";
-    var slideEls = images.map(function (src, i) {
-      var img = document.createElement("img");
-      img.src = src;
-      img.alt = "";
-      img.className = "gallery-slide" + (i === 0 ? " active" : "");
-      lightboxSlides.appendChild(img);
-      return img;
-    });
-    if (images.length < 2) return;
-    var current = 0;
-    var dotEls = images.map(function (src, i) {
-      var b = document.createElement("button");
-      b.setAttribute("aria-label", "Show photo " + (i + 1) + " of " + images.length);
-      if (i === 0) b.classList.add("active");
-      b.addEventListener("click", function () { show(i); restart(); });
-      lightboxDots.appendChild(b);
-      return b;
-    });
-    function show(i) {
-      slideEls[current].classList.remove("active");
-      dotEls[current].classList.remove("active");
-      current = i;
-      slideEls[current].classList.add("active");
-      dotEls[current].classList.add("active");
-    }
-    function restart() {
-      clearInterval(lightboxGalleryTimer);
-      lightboxGalleryTimer = setInterval(function () { show((current + 1) % images.length); }, 3800);
-    }
-    restart();
+  function pad2(n) {
+    return n < 10 ? "0" + n : "" + n;
   }
 
   function renderLightbox(id) {
@@ -526,8 +492,9 @@
     lightboxIndex = RACK_ORDER.indexOf(id);
 
     if (lightboxPanel) lightboxPanel.style.setProperty("--card-color", p.color);
-    renderLightboxGallery(p.images);
-    if (lightboxCount) lightboxCount.textContent = (lightboxIndex + 1) + " / " + RACK_ORDER.length;
+    lightboxFrontImg.src = p.image;
+    lightboxFrontImg.alt = p.name;
+    if (lightboxCount) lightboxCount.textContent = pad2(lightboxIndex + 1) + " / " + pad2(RACK_ORDER.length);
     lightboxName.textContent = p.shortName;
     lightboxDesc.textContent = p.desc;
 
@@ -558,7 +525,6 @@
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    clearInterval(lightboxGalleryTimer);
   }
 
   function stepLightbox(delta) {

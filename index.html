@@ -100,39 +100,52 @@
 
       <div class="rack-scroll">
         <div class="rack-rail-wrap">
-          <svg class="rack-rail-svg" viewBox="0 0 1000 50" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0,12 Q500,64 1000,12" fill="none" stroke="#16150f" stroke-width="4" stroke-linecap="round"></path>
-          </svg>
+          <div class="rack-rail" aria-hidden="true">
+            <span class="rack-rail-cap rack-rail-cap-left" aria-hidden="true"></span>
+            <span class="rack-rail-cap rack-rail-cap-right" aria-hidden="true"></span>
+          </div>
           <ul class="rack-items" id="rackItems">
-            <li><button type="button" class="rack-item" data-product="resistance" style="--card-color:#2b5d1c;">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="resistance" style="--card-color:#2b5d1c;">
               <span class="rack-tag" aria-hidden="true">JD 25</span>
-              <span class="rack-thumb"><img src="assets/resistance-hoodie.png" alt="Wear Your Resistance hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/resistance-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/resistance-hoodie.png" alt="Wear Your Resistance hoodie">
+              </span>
             </button></li>
-            <li><button type="button" class="rack-item" data-product="solidarity" style="--card-color:#8a1414;">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="solidarity" style="--card-color:#8a1414;">
               <span class="rack-tag" aria-hidden="true">JD 25</span>
-              <span class="rack-thumb"><img src="assets/solidarity-hoodie.png" alt="Wear Your Solidarity hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/solidarity-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/solidarity-hoodie.png" alt="Wear Your Solidarity hoodie">
+              </span>
             </button></li>
-            <li><button type="button" class="rack-item" data-product="kite" style="--card-color:var(--yellow);">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="kite" style="--card-color:var(--yellow);">
               <span class="rack-tag" aria-hidden="true">JD 20</span>
-              <span class="rack-thumb"><img src="assets/fly-your-kite-hoodie.png" alt="Fly Your Kite hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/fly-your-kite-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/fly-your-kite-hoodie.png" alt="Fly Your Kite hoodie">
+              </span>
             </button></li>
-            <li><button type="button" class="rack-item" data-product="kindness" style="--card-color:#1c8f7c;">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="kindness" style="--card-color:#1c8f7c;">
               <span class="rack-tag rack-tag-soon" aria-hidden="true">Soon</span>
-              <span class="rack-thumb"><img src="assets/kindness-hoodie.png" alt="Wear Your Kindness hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/kindness-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/kindness-hoodie.png" alt="Wear Your Kindness hoodie">
+              </span>
             </button></li>
-            <li><button type="button" class="rack-item" data-product="ego" style="--card-color:#5b23e8;">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="ego" style="--card-color:#5b23e8;">
               <span class="rack-tag rack-tag-soon" aria-hidden="true">Soon</span>
-              <span class="rack-thumb"><img src="assets/ego-hoodie.png" alt="Wear Your Ego hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/ego-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/ego-hoodie.png" alt="Wear Your Ego hoodie">
+              </span>
             </button></li>
-            <li><button type="button" class="rack-item" data-product="drama" style="--card-color:#0e93a4;">
-              <span class="rack-hook" aria-hidden="true"></span>
+            <li class="reveal"><button type="button" class="rack-item" data-product="drama" style="--card-color:#0e93a4;">
               <span class="rack-tag rack-tag-soon" aria-hidden="true">Soon</span>
-              <span class="rack-thumb"><img src="assets/drama-hoodie.png" alt="Wear Your Drama hoodie"></span>
+              <span class="rack-thumb">
+                <img class="rack-img rack-img-side" src="assets/drama-hoodie-side.png" alt="">
+                <img class="rack-img rack-img-front" src="assets/drama-hoodie.png" alt="Wear Your Drama hoodie">
+              </span>
             </button></li>
           </ul>
         </div>
@@ -239,34 +252,29 @@
     <button type="button" class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous product">&larr;</button>
     <button type="button" class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next product">&rarr;</button>
 
-    <div class="lightbox-visual">
-      <span class="rack-hook" aria-hidden="true"></span>
-      <div class="lightbox-media card-media card-gallery" id="lightboxMedia">
-        <div class="lightbox-slides" id="lightboxSlides"></div>
-        <div class="gallery-dots" id="lightboxDots"></div>
-        <span class="limited-edition-badge" id="lightboxLimitedBadge" hidden>Limited Edition</span>
-        <span class="coming-soon-badge" id="lightboxSoonBadge" hidden>Coming Soon</span>
-      </div>
+    <p class="lightbox-count" id="lightboxCount"></p>
+
+    <div class="lightbox-media" id="lightboxMedia">
+      <img class="lightbox-front-img" id="lightboxFrontImg" src="" alt="">
+      <span class="limited-edition-badge" id="lightboxLimitedBadge" hidden>Limited Edition</span>
+      <span class="coming-soon-badge" id="lightboxSoonBadge" hidden>Coming Soon</span>
     </div>
 
-    <div class="lightbox-info">
-      <p class="lightbox-count" id="lightboxCount"></p>
-      <h3 id="lightboxName"></h3>
-      <p id="lightboxDesc"></p>
+    <h3 id="lightboxName"></h3>
+    <p id="lightboxDesc"></p>
 
-      <div class="lightbox-buy" id="lightboxBuy" hidden>
-        <p class="card-price" id="lightboxPrice"></p>
-        <div class="size-picker" role="group" aria-label="Select size">
-          <button type="button" class="size-opt" data-size="S">S</button>
-          <button type="button" class="size-opt active" data-size="M">M</button>
-          <button type="button" class="size-opt" data-size="L">L</button>
-          <button type="button" class="size-opt" data-size="XL">XL</button>
-        </div>
-        <button type="button" class="add-cart-btn" id="lightboxAddCart">Add to Cart</button>
+    <div class="lightbox-buy" id="lightboxBuy" hidden>
+      <p class="card-price" id="lightboxPrice"></p>
+      <div class="size-picker" role="group" aria-label="Select size">
+        <button type="button" class="size-opt" data-size="S">S</button>
+        <button type="button" class="size-opt active" data-size="M">M</button>
+        <button type="button" class="size-opt" data-size="L">L</button>
+        <button type="button" class="size-opt" data-size="XL">XL</button>
       </div>
-
-      <a href="#shop" class="card-link" id="lightboxNotify" hidden>Get Notified <span>&rarr;</span></a>
+      <button type="button" class="add-cart-btn" id="lightboxAddCart">Add to Cart</button>
     </div>
+
+    <a href="#shop" class="card-link" id="lightboxNotify" hidden>Get Notified <span>&rarr;</span></a>
   </div>
 </div>
 
