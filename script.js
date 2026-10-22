@@ -446,7 +446,10 @@
     if (!product) return;
 
     function preview() {
-      if (rackCaption) rackCaption.textContent = product.shortName;
+      if (!rackCaption) return;
+      rackCaption.textContent = product.inStock
+        ? product.shortName + " — " + money(product.price)
+        : product.shortName + " — Coming Soon";
     }
     function resetPreview() {
       if (rackCaption) rackCaption.textContent = rackDefaultCaption;
@@ -464,6 +467,7 @@
   var lightboxSlides = document.getElementById("lightboxSlides");
   var lightboxDots = document.getElementById("lightboxDots");
   var lightboxName = document.getElementById("lightboxName");
+  var lightboxCount = document.getElementById("lightboxCount");
   var lightboxDesc = document.getElementById("lightboxDesc");
   var lightboxLimitedBadge = document.getElementById("lightboxLimitedBadge");
   var lightboxSoonBadge = document.getElementById("lightboxSoonBadge");
@@ -523,6 +527,7 @@
 
     if (lightboxPanel) lightboxPanel.style.setProperty("--card-color", p.color);
     renderLightboxGallery(p.images);
+    if (lightboxCount) lightboxCount.textContent = (lightboxIndex + 1) + " / " + RACK_ORDER.length;
     lightboxName.textContent = p.shortName;
     lightboxDesc.textContent = p.desc;
 
