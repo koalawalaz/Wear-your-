@@ -162,43 +162,43 @@
       name: "Wear Your Resistance", shortName: "Resistance",
       desc: "Some things you don't stay silent about.",
       price: 25, inStock: true, color: "#2b5d1c",
-      image: "assets/resistance-v2.png",
-      images: ["assets/resistance-v2.png", "assets/resistance-model.png", "assets/resistance-back.png"]
+      image: "assets/resistance-hoodie.png",
+      images: ["assets/resistance-hoodie.png", "assets/resistance-model.png", "assets/resistance-back.png"]
     },
     solidarity: {
       name: "Wear Your Solidarity", shortName: "Solidarity",
       desc: "Your voice carries the values you hold.",
       price: 25, inStock: true, color: "#8a1414",
-      image: "assets/solidarity.png",
-      images: ["assets/solidarity.png", "assets/solidarity-front.png", "assets/solidarity-portrait.png", "assets/solidarity-flatlay.png"]
+      image: "assets/solidarity-hoodie.png",
+      images: ["assets/solidarity-hoodie.png", "assets/solidarity-front.png", "assets/solidarity-portrait.png", "assets/solidarity-flatlay.png"]
     },
     kite: {
       name: "Fly Your Kite", shortName: "Fly Your Kite",
       desc: "When flying a kite is an act of war, letting go of the string is an act of freedom.",
       price: 20, inStock: true, color: "#f5c518", badge: "Limited Edition",
-      image: "assets/fly-your-kite.png",
-      images: ["assets/fly-your-kite.png"]
+      image: "assets/fly-your-kite-hoodie.png",
+      images: ["assets/fly-your-kite-hoodie.png"]
     },
     kindness: {
       name: "Wear Your Kindness", shortName: "Kindness",
       desc: "Wear the value you hold when no one's asking you to.",
       inStock: false, color: "#1c8f7c", badge: "Coming Soon",
-      image: "assets/kindness.png",
-      images: ["assets/kindness.png"]
+      image: "assets/kindness-hoodie.png",
+      images: ["assets/kindness-hoodie.png"]
     },
     ego: {
       name: "Wear Your Ego", shortName: "Ego",
       desc: "Your principles aren't up for negotiation.",
       inStock: false, color: "#5b23e8", badge: "Coming Soon",
-      image: "assets/ego.png",
-      images: ["assets/ego.png"]
+      image: "assets/ego-hoodie.png",
+      images: ["assets/ego-hoodie.png"]
     },
     drama: {
       name: "Wear Your Drama", shortName: "Drama",
       desc: "Every story deserves its spotlight.",
       inStock: false, color: "#0e93a4", badge: "Coming Soon",
-      image: "assets/drama.png",
-      images: ["assets/drama.png"]
+      image: "assets/drama-hoodie.png",
+      images: ["assets/drama-hoodie.png"]
     }
   };
   var RACK_ORDER = ["resistance", "solidarity", "kite", "kindness", "ego", "drama"];
