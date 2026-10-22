@@ -115,64 +115,6 @@
   // Footer year
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Pick Your Statement — jump to a collection card and highlight it
-  var statementSelect = document.getElementById("statementSelect");
-  if (statementSelect) {
-    statementSelect.addEventListener("change", function () {
-      var card = document.getElementById(statementSelect.value);
-      if (card) {
-        card.scrollIntoView({ behavior: "smooth", block: "start" });
-        card.classList.remove("jump-highlight");
-        void card.offsetWidth;
-        card.classList.add("jump-highlight");
-        setTimeout(function () {
-          card.classList.remove("jump-highlight");
-        }, 1500);
-      }
-      statementSelect.selectedIndex = 0;
-    });
-  }
-
-  // Collection card photo galleries (Resistance / Solidarity real product shots)
-  document.querySelectorAll(".card-gallery").forEach(function (gallery) {
-    var slides = Array.prototype.slice.call(gallery.querySelectorAll(".gallery-slide"));
-    var dotsWrap = gallery.querySelector(".gallery-dots");
-    if (slides.length < 2 || !dotsWrap) return;
-
-    var dots = slides.map(function (slide, i) {
-      var b = document.createElement("button");
-      b.setAttribute("aria-label", "Show photo " + (i + 1) + " of " + slides.length);
-      if (i === 0) b.classList.add("active");
-      b.addEventListener("click", function (e) {
-        e.preventDefault();
-        show(i);
-        restart();
-      });
-      dotsWrap.appendChild(b);
-      return b;
-    });
-
-    var current = 0;
-    var galleryTimer;
-
-    function show(i) {
-      slides[current].classList.remove("active");
-      dots[current].classList.remove("active");
-      current = i;
-      slides[current].classList.add("active");
-      dots[current].classList.add("active");
-    }
-
-    function restart() {
-      clearInterval(galleryTimer);
-      galleryTimer = setInterval(function () {
-        show((current + 1) % slides.length);
-      }, 3800);
-    }
-
-    restart();
-  });
-
   // Scroll-triggered reveals
   if ("IntersectionObserver" in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
@@ -216,10 +158,50 @@
   if (!cartToggle || !cartDrawer) return;
 
   var PRODUCTS = {
-    resistance: { name: "Wear Your Resistance", price: 25, image: "assets/resistance-v2.png" },
-    solidarity: { name: "Wear Your Solidarity", price: 25, image: "assets/solidarity.png" },
-    kite: { name: "Fly Your Kite", price: 20, image: "assets/fly-your-kite.png" }
+    resistance: {
+      name: "Wear Your Resistance", shortName: "Resistance",
+      desc: "Some things you don't stay silent about.",
+      price: 25, inStock: true, color: "#2b5d1c",
+      image: "assets/resistance-v2.png",
+      images: ["assets/resistance-v2.png", "assets/resistance-model.png", "assets/resistance-back.png"]
+    },
+    solidarity: {
+      name: "Wear Your Solidarity", shortName: "Solidarity",
+      desc: "Your voice carries the values you hold.",
+      price: 25, inStock: true, color: "#8a1414",
+      image: "assets/solidarity.png",
+      images: ["assets/solidarity.png", "assets/solidarity-front.png", "assets/solidarity-portrait.png", "assets/solidarity-flatlay.png"]
+    },
+    kite: {
+      name: "Fly Your Kite", shortName: "Fly Your Kite",
+      desc: "When flying a kite is an act of war, letting go of the string is an act of freedom.",
+      price: 20, inStock: true, color: "#f5c518", badge: "Limited Edition",
+      image: "assets/fly-your-kite.png",
+      images: ["assets/fly-your-kite.png"]
+    },
+    kindness: {
+      name: "Wear Your Kindness", shortName: "Kindness",
+      desc: "Wear the value you hold when no one's asking you to.",
+      inStock: false, color: "#1c8f7c", badge: "Coming Soon",
+      image: "assets/kindness.png",
+      images: ["assets/kindness.png"]
+    },
+    ego: {
+      name: "Wear Your Ego", shortName: "Ego",
+      desc: "Your principles aren't up for negotiation.",
+      inStock: false, color: "#5b23e8", badge: "Coming Soon",
+      image: "assets/ego.png",
+      images: ["assets/ego.png"]
+    },
+    drama: {
+      name: "Wear Your Drama", shortName: "Drama",
+      desc: "Every story deserves its spotlight.",
+      inStock: false, color: "#0e93a4", badge: "Coming Soon",
+      image: "assets/drama.png",
+      images: ["assets/drama.png"]
+    }
   };
+  var RACK_ORDER = ["resistance", "solidarity", "kite", "kindness", "ego", "drama"];
   var DELIVERY_FEE = 2;
   var FREE_DELIVERY_THRESHOLD = 50;
   var STORAGE_KEY = "wearyour_cart";
@@ -453,40 +435,191 @@
     }
   }
 
-  // Size pickers (one active size per product card)
-  document.querySelectorAll(".collection-card").forEach(function (card) {
-    var picker = card.querySelector(".size-picker");
-    if (!picker) return;
-    var opts = picker.querySelectorAll(".size-opt");
-    opts.forEach(function (opt) {
+  // Rack — hover/focus a hanging item to preview its name; click opens the lightbox
+  var rackCaption = document.getElementById("rackCaption");
+  var rackDefaultCaption = rackCaption ? rackCaption.textContent : "";
+  var rackItems = document.querySelectorAll(".rack-item");
+
+  rackItems.forEach(function (item) {
+    var id = item.getAttribute("data-product");
+    var product = PRODUCTS[id];
+    if (!product) return;
+
+    function preview() {
+      if (rackCaption) rackCaption.textContent = product.shortName;
+    }
+    function resetPreview() {
+      if (rackCaption) rackCaption.textContent = rackDefaultCaption;
+    }
+    item.addEventListener("mouseenter", preview);
+    item.addEventListener("focus", preview);
+    item.addEventListener("mouseleave", resetPreview);
+    item.addEventListener("blur", resetPreview);
+    item.addEventListener("click", function () { openLightbox(id); });
+  });
+
+  // Product lightbox — focused view with prev/next navigation across the rack
+  var lightbox = document.getElementById("productLightbox");
+  var lightboxPanel = lightbox ? lightbox.querySelector(".lightbox-panel") : null;
+  var lightboxSlides = document.getElementById("lightboxSlides");
+  var lightboxDots = document.getElementById("lightboxDots");
+  var lightboxName = document.getElementById("lightboxName");
+  var lightboxDesc = document.getElementById("lightboxDesc");
+  var lightboxLimitedBadge = document.getElementById("lightboxLimitedBadge");
+  var lightboxSoonBadge = document.getElementById("lightboxSoonBadge");
+  var lightboxBuy = document.getElementById("lightboxBuy");
+  var lightboxPrice = document.getElementById("lightboxPrice");
+  var lightboxSizePicker = lightboxBuy ? lightboxBuy.querySelector(".size-picker") : null;
+  var lightboxAddCart = document.getElementById("lightboxAddCart");
+  var lightboxNotify = document.getElementById("lightboxNotify");
+  var lightboxClose = document.getElementById("lightboxClose");
+  var lightboxOverlay = document.getElementById("lightboxOverlay");
+  var lightboxPrev = document.getElementById("lightboxPrev");
+  var lightboxNext = document.getElementById("lightboxNext");
+
+  var lightboxIndex = 0;
+  var lightboxGalleryTimer;
+
+  function renderLightboxGallery(images) {
+    clearInterval(lightboxGalleryTimer);
+    lightboxSlides.innerHTML = "";
+    lightboxDots.innerHTML = "";
+    var slideEls = images.map(function (src, i) {
+      var img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      img.className = "gallery-slide" + (i === 0 ? " active" : "");
+      lightboxSlides.appendChild(img);
+      return img;
+    });
+    if (images.length < 2) return;
+    var current = 0;
+    var dotEls = images.map(function (src, i) {
+      var b = document.createElement("button");
+      b.setAttribute("aria-label", "Show photo " + (i + 1) + " of " + images.length);
+      if (i === 0) b.classList.add("active");
+      b.addEventListener("click", function () { show(i); restart(); });
+      lightboxDots.appendChild(b);
+      return b;
+    });
+    function show(i) {
+      slideEls[current].classList.remove("active");
+      dotEls[current].classList.remove("active");
+      current = i;
+      slideEls[current].classList.add("active");
+      dotEls[current].classList.add("active");
+    }
+    function restart() {
+      clearInterval(lightboxGalleryTimer);
+      lightboxGalleryTimer = setInterval(function () { show((current + 1) % images.length); }, 3800);
+    }
+    restart();
+  }
+
+  function renderLightbox(id) {
+    var p = PRODUCTS[id];
+    if (!p || !lightbox) return;
+    lightboxIndex = RACK_ORDER.indexOf(id);
+
+    if (lightboxPanel) lightboxPanel.style.setProperty("--card-color", p.color);
+    renderLightboxGallery(p.images);
+    lightboxName.textContent = p.shortName;
+    lightboxDesc.textContent = p.desc;
+
+    lightboxLimitedBadge.hidden = p.badge !== "Limited Edition";
+    lightboxSoonBadge.hidden = p.badge !== "Coming Soon";
+
+    if (p.inStock) {
+      lightboxBuy.hidden = false;
+      lightboxNotify.hidden = true;
+      lightboxPrice.textContent = money(p.price);
+      lightboxAddCart.setAttribute("data-product", id);
+      var opts = lightboxSizePicker.querySelectorAll(".size-opt");
+      opts.forEach(function (o, i) { o.classList.toggle("active", i === 1); });
+    } else {
+      lightboxBuy.hidden = true;
+      lightboxNotify.hidden = false;
+    }
+  }
+
+  function openLightbox(id) {
+    renderLightbox(id);
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    clearInterval(lightboxGalleryTimer);
+  }
+
+  function stepLightbox(delta) {
+    var next = (lightboxIndex + delta + RACK_ORDER.length) % RACK_ORDER.length;
+    renderLightbox(RACK_ORDER[next]);
+  }
+
+  if (lightbox) {
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxOverlay.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", function () { stepLightbox(-1); });
+    lightboxNext.addEventListener("click", function () { stepLightbox(1); });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") stepLightbox(-1);
+      if (e.key === "ArrowRight") stepLightbox(1);
+    });
+
+    lightboxSizePicker.querySelectorAll(".size-opt").forEach(function (opt) {
       opt.addEventListener("click", function () {
-        opts.forEach(function (o) { o.classList.remove("active"); });
+        lightboxSizePicker.querySelectorAll(".size-opt").forEach(function (o) { o.classList.remove("active"); });
         opt.classList.add("active");
       });
     });
-  });
 
-  // Add to cart
-  document.querySelectorAll(".add-cart-btn").forEach(function (btn) {
-    var originalText = btn.textContent;
-    btn.addEventListener("click", function () {
-      var id = btn.getAttribute("data-product");
-      var card = btn.closest(".collection-card");
-      var activeOpt = card ? card.querySelector(".size-opt.active") : null;
+    lightboxAddCart.addEventListener("click", function () {
+      var id = lightboxAddCart.getAttribute("data-product");
+      var activeOpt = lightboxSizePicker.querySelector(".size-opt.active");
       var size = activeOpt ? activeOpt.getAttribute("data-size") : "M";
       addToCart(id, size);
 
-      btn.classList.add("added");
-      btn.textContent = "Added ✓";
+      var original = lightboxAddCart.textContent;
+      lightboxAddCart.classList.add("added");
+      lightboxAddCart.textContent = "Added ✓";
       setTimeout(function () {
-        btn.classList.remove("added");
-        btn.textContent = originalText;
+        lightboxAddCart.classList.remove("added");
+        lightboxAddCart.textContent = original;
       }, 1200);
 
+      closeLightbox();
       showView(cartView);
       openDrawer();
     });
-  });
+  }
+
+  // Pick Your Statement — open the matching product directly
+  var statementSelect = document.getElementById("statementSelect");
+  if (statementSelect && lightbox) {
+    statementSelect.addEventListener("change", function () {
+      if (statementSelect.value) openLightbox(statementSelect.value);
+      statementSelect.selectedIndex = 0;
+    });
+  }
+
+  // Hero "Limited Edition: Fly Your Kite" badge — scroll to the rack and open it
+  var heroKiteBadge = document.getElementById("heroKiteBadge");
+  if (heroKiteBadge && lightbox) {
+    heroKiteBadge.addEventListener("click", function (e) {
+      e.preventDefault();
+      var collections = document.getElementById("collections");
+      if (collections) collections.scrollIntoView({ behavior: "smooth", block: "start" });
+      openLightbox("kite");
+    });
+  }
 
   cartCheckoutBtn.addEventListener("click", function () {
     if (cart.length === 0) return;

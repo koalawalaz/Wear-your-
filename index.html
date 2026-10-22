@@ -61,7 +61,7 @@
         <a href="#manifesto" class="btn btn-outline">Our Manifesto</a>
       </div>
       <div class="hero-dots" id="heroDots"></div>
-      <a href="#fly-your-kite" class="hero-limited-badge">🪁 Limited Edition: Fly Your Kite</a>
+      <a href="#collections" class="hero-limited-badge" id="heroKiteBadge">🪁 Limited Edition: Fly Your Kite</a>
     </div>
     <div class="scroll-cue">
       <span></span>
@@ -90,7 +90,7 @@
             <option value="" selected disabled>Pick your statement</option>
             <option value="resistance">Resistance</option>
             <option value="solidarity">Solidarity</option>
-            <option value="fly-your-kite">Fly Your Kite</option>
+            <option value="kite">Fly Your Kite</option>
             <option value="kindness">Kindness</option>
             <option value="ego">Ego</option>
             <option value="drama">Drama</option>
@@ -98,107 +98,35 @@
         </div>
       </div>
 
-      <div class="collection-grid">
-
-        <article class="collection-card reveal" id="resistance" style="--card-color:#2b5d1c;">
-          <div class="card-media card-gallery">
-            <img src="assets/resistance-v2.png" alt="Wear Your Resistance — raised fist holding an olive branch on a dark green background" class="gallery-slide active">
-            <img src="assets/resistance-model.png" alt="Model wearing the dusty-green Wear Your Resistance zip hoodie, fist-and-olive-branch mark on the chest" class="gallery-slide">
-            <img src="assets/resistance-back.png" alt="Back print of the Resistance hoodie reading: If Palestine divides us, what exactly unites us?" class="gallery-slide">
-            <div class="gallery-dots"></div>
-          </div>
-          <div class="card-body">
-            <h3>Resistance</h3>
-            <p>Some things you don't stay silent about.</p>
-            <p class="card-price">JD 25.00</p>
-            <div class="size-picker" role="group" aria-label="Select size">
-              <button type="button" class="size-opt" data-size="S">S</button>
-              <button type="button" class="size-opt active" data-size="M">M</button>
-              <button type="button" class="size-opt" data-size="L">L</button>
-              <button type="button" class="size-opt" data-size="XL">XL</button>
-            </div>
-            <button type="button" class="add-cart-btn" data-product="resistance">Add to Cart</button>
-          </div>
-        </article>
-
-        <article class="collection-card reveal" id="solidarity" style="--card-color:#8a1414;">
-          <div class="card-media card-gallery">
-            <img src="assets/solidarity.png" alt="Wear Your Solidarity — clasped hands on a deep red background" class="gallery-slide active">
-            <img src="assets/solidarity-front.png" alt="Front print of the black Wear Your Solidarity hoodie, keffiyeh-patterned block text and an olive branch" class="gallery-slide">
-            <img src="assets/solidarity-portrait.png" alt="Model wearing the black Wear Your Solidarity hoodie in an olive grove, holding an olive sprig" class="gallery-slide">
-            <img src="assets/solidarity-flatlay.png" alt="Flat-lay of the black Wear Your Solidarity hoodie on a linen and wood surface" class="gallery-slide">
-            <div class="gallery-dots"></div>
-          </div>
-          <div class="card-body">
-            <h3>Solidarity</h3>
-            <p>Your voice carries the values you hold.</p>
-            <p class="card-price">JD 25.00</p>
-            <div class="size-picker" role="group" aria-label="Select size">
-              <button type="button" class="size-opt" data-size="S">S</button>
-              <button type="button" class="size-opt active" data-size="M">M</button>
-              <button type="button" class="size-opt" data-size="L">L</button>
-              <button type="button" class="size-opt" data-size="XL">XL</button>
-            </div>
-            <button type="button" class="add-cart-btn" data-product="solidarity">Add to Cart</button>
-          </div>
-        </article>
-
-        <article class="collection-card collection-card-kite reveal" id="fly-your-kite" style="--card-color:var(--yellow);">
-          <div class="card-media">
-            <img src="assets/fly-your-kite.png" alt="Fly Your Kite — a kite illustration on a yellow background">
-            <span class="limited-edition-badge">Limited Edition</span>
-          </div>
-          <div class="card-body">
-            <h3>Fly Your Kite</h3>
-            <p>When flying a kite is an act of war, letting go of the string is an act of freedom.</p>
-            <p class="card-price">JD 20.00</p>
-            <div class="size-picker" role="group" aria-label="Select size">
-              <button type="button" class="size-opt" data-size="S">S</button>
-              <button type="button" class="size-opt active" data-size="M">M</button>
-              <button type="button" class="size-opt" data-size="L">L</button>
-              <button type="button" class="size-opt" data-size="XL">XL</button>
-            </div>
-            <button type="button" class="add-cart-btn" data-product="kite">Add to Cart</button>
-          </div>
-        </article>
-
-        <article class="collection-card reveal" id="kindness" style="--card-color:#1c8f7c;">
-          <div class="card-media">
-            <img src="assets/kindness.png" alt="Wear Your Kindness — two hands clasped in a heart shape, hand-lettered &quot;I am kind&quot; above">
-            <span class="coming-soon-badge">Coming Soon</span>
-          </div>
-          <div class="card-body">
-            <h3>Kindness</h3>
-            <p>Wear the value you hold when no one's asking you to.</p>
-            <a href="#shop" class="card-link">Get Notified <span>&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="collection-card reveal" id="ego" style="--card-color:#5b23e8;">
-          <div class="card-media">
-            <img src="assets/ego.png" alt="Wear Your Ego — a striped tiger on a violet background">
-            <span class="coming-soon-badge">Coming Soon</span>
-          </div>
-          <div class="card-body">
-            <h3>Ego</h3>
-            <p>Your principles aren't up for negotiation.</p>
-            <a href="#shop" class="card-link">Get Notified <span>&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="collection-card reveal" id="drama" style="--card-color:#0e93a4;">
-          <div class="card-media">
-            <img src="assets/drama.png" alt="Wear Your Drama — a star trophy on a teal background">
-            <span class="coming-soon-badge">Coming Soon</span>
-          </div>
-          <div class="card-body">
-            <h3>Drama</h3>
-            <p>Every story deserves its spotlight.</p>
-            <a href="#shop" class="card-link">Get Notified <span>&rarr;</span></a>
-          </div>
-        </article>
-
+      <div class="rack-scroll">
+        <ul class="rack-items" id="rackItems">
+          <li><button type="button" class="rack-item" data-product="resistance" style="--card-color:#2b5d1c;">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/resistance-v2.png" alt="Wear Your Resistance"></span>
+          </button></li>
+          <li><button type="button" class="rack-item" data-product="solidarity" style="--card-color:#8a1414;">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/solidarity.png" alt="Wear Your Solidarity"></span>
+          </button></li>
+          <li><button type="button" class="rack-item" data-product="kite" style="--card-color:var(--yellow);">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/fly-your-kite.png" alt="Fly Your Kite"></span>
+          </button></li>
+          <li><button type="button" class="rack-item" data-product="kindness" style="--card-color:#1c8f7c;">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/kindness.png" alt="Wear Your Kindness"></span>
+          </button></li>
+          <li><button type="button" class="rack-item" data-product="ego" style="--card-color:#5b23e8;">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/ego.png" alt="Wear Your Ego"></span>
+          </button></li>
+          <li><button type="button" class="rack-item" data-product="drama" style="--card-color:#0e93a4;">
+            <span class="rack-hook" aria-hidden="true"></span>
+            <span class="rack-thumb"><img src="assets/drama.png" alt="Wear Your Drama"></span>
+          </button></li>
+        </ul>
       </div>
+      <p class="rack-caption" id="rackCaption">Hover or tap a piece to see its name</p>
     </div>
   </section>
 
@@ -289,6 +217,39 @@
     </a>
   </div>
 </footer>
+
+<div class="product-lightbox" id="productLightbox" aria-hidden="true">
+  <div class="lightbox-overlay" id="lightboxOverlay"></div>
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lightboxName" style="--card-color:#2b5d1c;">
+    <button type="button" class="lightbox-close" id="lightboxClose">Close <span aria-hidden="true">&times;</span></button>
+    <button type="button" class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous product">&larr;</button>
+    <button type="button" class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next product">&rarr;</button>
+
+    <span class="rack-hook" aria-hidden="true"></span>
+    <div class="lightbox-media card-media card-gallery" id="lightboxMedia">
+      <div class="lightbox-slides" id="lightboxSlides"></div>
+      <div class="gallery-dots" id="lightboxDots"></div>
+      <span class="limited-edition-badge" id="lightboxLimitedBadge" hidden>Limited Edition</span>
+      <span class="coming-soon-badge" id="lightboxSoonBadge" hidden>Coming Soon</span>
+    </div>
+
+    <h3 id="lightboxName"></h3>
+    <p id="lightboxDesc"></p>
+
+    <div class="lightbox-buy" id="lightboxBuy" hidden>
+      <p class="card-price" id="lightboxPrice"></p>
+      <div class="size-picker" role="group" aria-label="Select size">
+        <button type="button" class="size-opt" data-size="S">S</button>
+        <button type="button" class="size-opt active" data-size="M">M</button>
+        <button type="button" class="size-opt" data-size="L">L</button>
+        <button type="button" class="size-opt" data-size="XL">XL</button>
+      </div>
+      <button type="button" class="add-cart-btn" id="lightboxAddCart">Add to Cart</button>
+    </div>
+
+    <a href="#shop" class="card-link" id="lightboxNotify" hidden>Get Notified <span>&rarr;</span></a>
+  </div>
+</div>
 
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
